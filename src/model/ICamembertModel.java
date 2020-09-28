@@ -20,7 +20,7 @@ public interface ICamembertModel {
 	
 	void setItem(IItem item);
 	
-	void deleteItem(IItem item);
+	void deleteItem(int itemIndex);
 	
 	int size();
 	

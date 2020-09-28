@@ -48,7 +48,6 @@ public class Controller implements IController {
 	@Override
 	public void nextPie() {
 		this.view.nextPie();
-		
 	}
 
 	@Override
@@ -59,6 +58,16 @@ public class Controller implements IController {
 	@Override
 	public ICamembertView getView() {
 		return this.view;
+	}
+
+	@Override
+	public void addItem(String title, String description, double value) {
+		this.adapter.addItem(title, description, value);	
+	}
+
+	@Override
+	public void deleteItem(int itemIndex) {
+		this.adapter.deleteItem(itemIndex);
 	}
 
 }

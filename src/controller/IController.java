@@ -1,5 +1,6 @@
 package controller;
 
+import model.IItem;
 import view.ICamembertView;
 
 public interface IController {
@@ -19,6 +20,11 @@ public interface IController {
 	void nextPie();
 
 	void previousPie();
+	
+	void addItem(String title, String description, double value);
+	
+	void deleteItem(int itemIndex);
 
 	ICamembertView getView();
+
 }

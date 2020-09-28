@@ -6,24 +6,13 @@ import java.util.List;
 public class CamembertModel implements ICamembertModel {
 	
 	private String title;
-	private double total;
 	private String unit;
 	private List<IItem> items;
 
 	public CamembertModel(String title, String unit) {
 		this.title = title;
 		this.unit = unit;
-		this.total = 0.0;
 		this.items = new ArrayList<IItem>();
-	}
-	
-	private void updateTotal() {
-		double total = 0.0;
-		for (IItem item : this.items) {
-			total += item.getItemValue();
-		}
-		
-		this.total = total;
 	}
 
 	@Override
@@ -43,7 +32,12 @@ public class CamembertModel implements ICamembertModel {
 
 	@Override
 	public double total() {
-		return this.total;
+		double total = 0.0;
+		for (IItem item : this.items) {
+			total += item.getItemValue();
+		}
+		
+		return total;
 	}
 	
 	@Override
@@ -58,8 +52,11 @@ public class CamembertModel implements ICamembertModel {
 
 	@Override
 	public void addItem(String title, String description, double value) {
+		if (title == null || title.equals("") || description == null || description.equals("") || value < 0) {
+			return;
+		}
+		
 		items.add(new Item(title, description, value));
-		this.updateTotal();
 	}
 
 	@Override
@@ -67,9 +64,11 @@ public class CamembertModel implements ICamembertModel {
 	}
 
 	@Override
-	public void deleteItem(IItem item) {
-		this.items.remove(item);
-		this.updateTotal();		
+	public void deleteItem(int itemIndex) {
+		if (itemIndex < 0 || itemIndex >= this.items.size()) {
+			return;
+		}
+		this.items.remove(itemIndex);
 	}
 
 	@Override
